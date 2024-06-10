@@ -5,23 +5,38 @@
 package gui;
 
 import dao.AlunoDAO;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.Aluno;
+import utils.ImcCalculator;
 
 /**
  *
  * @author Joniel
  */
 public class ConsultaGUI extends javax.swing.JFrame {
-
+    
+    private List<Aluno> listaAtual;
+    
     /**
      * Creates new form ConsultaGUI
      */
     public ConsultaGUI() {
+        setTitle("Gym: realizar consultas");
+        setSize(863,400);
+        setResizable(false);
+        //setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(ConsultaGUI.EXIT_ON_CLOSE);
         initComponents();
     }
 
@@ -46,10 +61,11 @@ public class ConsultaGUI extends javax.swing.JFrame {
         jTxtConsV2 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        jBtnBackToInsercao = new javax.swing.JButton();
+        jBtnExcluir = new javax.swing.JButton();
+        jBtnConsultar = new javax.swing.JButton();
+        jBtnAtualizar = new javax.swing.JButton();
+        jBtnSalvar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -79,31 +95,38 @@ public class ConsultaGUI extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jList1);
 
-        jButton6.setText("Tela Inserção");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jBtnBackToInsercao.setText("Tela Inserção");
+        jBtnBackToInsercao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jBtnBackToInsercaoActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Excluir");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jBtnExcluir.setText("Excluir");
+        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jBtnExcluirActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Consultar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jBtnConsultar.setText("Consultar");
+        jBtnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jBtnConsultarActionPerformed(evt);
             }
         });
 
-        jButton8.setText("Atualizar");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jBtnAtualizar.setText("Atualizar");
+        jBtnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jBtnAtualizarActionPerformed(evt);
+            }
+        });
+
+        jBtnSalvar.setText("Salvar Relatório");
+        jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalvarActionPerformed(evt);
             }
         });
 
@@ -115,13 +138,15 @@ public class ConsultaGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(185, 185, 185)
-                        .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(170, 170, 170)
-                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(153, 153, 153)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jBtnBackToInsercao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(99, 99, 99)
+                        .addComponent(jBtnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(111, 111, 111)
+                        .addComponent(jBtnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(111, 111, 111)
+                        .addComponent(jBtnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(110, 110, 110)
+                        .addComponent(jBtnConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -157,16 +182,17 @@ public class ConsultaGUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton5)
-                    .addComponent(jButton8))
+                    .addComponent(jBtnBackToInsercao)
+                    .addComponent(jBtnExcluir)
+                    .addComponent(jBtnConsultar)
+                    .addComponent(jBtnAtualizar)
+                    .addComponent(jBtnSalvar))
                 .addContainerGap())
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cadastro de Aluno");
+        jLabel1.setText("Gym");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -201,18 +227,20 @@ public class ConsultaGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jBtnBackToInsercaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBackToInsercaoActionPerformed
         InsercaoGUI NovaInstanciaAlunoGUI = new InsercaoGUI();
         NovaInstanciaAlunoGUI.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jBtnBackToInsercaoActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
         AlunoDAO dao = new AlunoDAO();
         
         // System.out.println(jBoxCons1.getSelectedItem());
         
         List<Aluno> listaDeAlunos = dao.consulta(String.valueOf(jBoxCons1.getSelectedItem()), jTxtConsV1.getText(), jTxtConsV2.getText());
+        
+        this.listaAtual = listaDeAlunos;
         
         //DefaultListModel<String> modeloLista = new DefaultListModel<>();
         
@@ -231,9 +259,9 @@ public class ConsultaGUI extends javax.swing.JFrame {
         
         jList1.setListData(modeloLista);
         
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jBtnConsultarActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         
         AlunoDAO dao = new AlunoDAO();
         
@@ -260,13 +288,13 @@ public class ConsultaGUI extends javax.swing.JFrame {
         
         if(exclusoesRealizadas == listaIds.size()){
             if(exclusoesRealizadas == 0){
-                JOptionPane.showMessageDialog(null, "Selecione um item para excluir!");
+                JOptionPane.showMessageDialog(this, "Selecione um item para excluir!");
             }
             else if (exclusoesRealizadas == 1){
-                JOptionPane.showMessageDialog(null, "Aluno(a) excluído(a) com sucesso!");
+                JOptionPane.showMessageDialog(this, "Aluno(a) excluído(a) com sucesso!");
             }
             else{
-                JOptionPane.showMessageDialog(null, "Alunos(as) excluídos(as) com sucesso!");
+                JOptionPane.showMessageDialog(this, "Alunos(as) excluídos(as) com sucesso!");
             }
             // System.out.println("OK"); 
         }
@@ -281,18 +309,18 @@ public class ConsultaGUI extends javax.swing.JFrame {
             catch(InterruptedException ex) {
                 ex.printStackTrace();
             }
-            jButton5.doClick(); // "Apertar" o botão
+            jBtnConsultar.doClick(); // "Apertar" o botão
         }).start();
         
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jBtnExcluirActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void jBtnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAtualizarActionPerformed
         
         AlunoDAO dao = new AlunoDAO();
         int itensSelecionados = jList1.getSelectedValuesList().size();
         
         if(itensSelecionados  <= 0){
-            JOptionPane.showMessageDialog(null, "Selecione um item para atualizar!");
+            JOptionPane.showMessageDialog(this, "Selecione um item para atualizar!");
         }
         else{
             List<Integer> listaIds = Aluno.extractId(jList1.getSelectedValuesList());
@@ -307,10 +335,53 @@ public class ConsultaGUI extends javax.swing.JFrame {
                 this.dispose();
             }
             else{
-                JOptionPane.showMessageDialog(null, "Aluno(a) não encontrado no banco de dados!");
+                JOptionPane.showMessageDialog(this, "Aluno(a) não encontrado no banco de dados!");
             }   
         }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jBtnAtualizarActionPerformed
+
+    private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
+        
+        if(listaAtual == null || listaAtual.size() <= 0){      
+            JOptionPane.showMessageDialog(this, "Não há dados para salvar!");
+        }
+        else{
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Gym: salvar relatorio");
+
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+            fileChooser.setFileFilter(filter);
+            fileChooser.setSelectedFile(new File("Relatório.txt"));
+
+            int userSelection = fileChooser.showSaveDialog(this);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+
+                if (!fileToSave.getName().toLowerCase().endsWith(".txt")) {
+                    fileToSave = new File(fileToSave.getAbsolutePath() + ".txt");
+                }
+
+                StringBuilder sb = new StringBuilder();
+
+                for(Aluno a : listaAtual){
+                    sb.append(ImcCalculator.report(a)).append("\n\n");
+                }
+
+                String information = sb.toString();
+
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave, true))) {
+                    writer.write(information);
+                    writer.newLine();
+                    JOptionPane.showMessageDialog(this, "Informação gravada com sucesso!");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Erro ao gravar a informação.");
+                }
+            }     
+        }
+
+    }//GEN-LAST:event_jBtnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,11 +420,12 @@ public class ConsultaGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jBoxCons1;
+    private javax.swing.JButton jBtnAtualizar;
+    private javax.swing.JButton jBtnBackToInsercao;
+    private javax.swing.JButton jBtnConsultar;
+    private javax.swing.JButton jBtnExcluir;
+    private javax.swing.JButton jBtnSalvar;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

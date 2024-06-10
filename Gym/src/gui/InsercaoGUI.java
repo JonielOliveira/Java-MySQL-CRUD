@@ -14,6 +14,12 @@ public class InsercaoGUI extends javax.swing.JFrame {
      * Creates new form AlunoGUI
      */
     public InsercaoGUI() {
+        setTitle("Gym: adicionar usuário");
+        setSize(850,400);
+        setResizable(false);
+        //setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(ConsultaGUI.EXIT_ON_CLOSE);
         initComponents();
     }
 
@@ -46,7 +52,7 @@ public class InsercaoGUI extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cadastro de Aluno");
+        jLabel1.setText("Gym");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -183,19 +189,19 @@ public class InsercaoGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if ((jTextField1.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "O campo NOME nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo NOME nao pode retornar vazio");
         }
         else if ((jTextField2.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "O campo CPF nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo CPF nao pode retornar vazio");
         }
         else if ((jTextField3.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "O campo DATA DE NASCIMENTO nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo DATA DE NASCIMENTO nao pode retornar vazio");
         }
         else if ((jTextField4.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "O campo PESO nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo PESO nao pode retornar vazio");
         }
         else if ((jTextField5.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "O campo ALTURA nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo ALTURA nao pode retornar vazio");
         }
         else {
             Aluno aluno = new Aluno();
@@ -224,7 +230,7 @@ public class InsercaoGUI extends javax.swing.JFrame {
 
             AlunoDAO dao = new AlunoDAO();
             dao.adiciona(aluno);
-            JOptionPane.showMessageDialog(null, "Aluno(a) " + jTextField1.getText() + " inserido(a) com sucesso!");
+            JOptionPane.showMessageDialog(this, "Aluno(a) " + jTextField1.getText() + " inserido(a) com sucesso!");
         }
 
         jTextField1.setText("");

@@ -6,12 +6,14 @@ import java.text.SimpleDateFormat;
 
 public class HistoricoPeso {
     
-    private int codigo;
+    private int id;
+    private int alunoId;
     private Date dataRegistro;
     private float peso;
     
-    public HistoricoPeso(int codigo, Date dataRegistro, float peso){
-        this.codigo = codigo;
+    public HistoricoPeso(int id, int alunoId, Date dataRegistro, float peso){
+        this.id = id;
+        this.alunoId = alunoId;
         this.peso = peso;
         this.dataRegistro = dataRegistro;
     }
@@ -20,14 +22,22 @@ public class HistoricoPeso {
         
     }
     
-    public int getCodigo() {
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int codigo) {
+        this.id = codigo;
+    }
+    
+    public int getAlunoId() {
+        return alunoId;
     }
 
+    public void setAlunoId(int alunoId) {
+        this.alunoId = alunoId;
+    }
+    
     public Date getDataRegistro() {
         return dataRegistro;
     }
@@ -74,7 +84,7 @@ public class HistoricoPeso {
     public String toString() {
         
         String dataRegistroFormatada = this.getDataRegistroFormatada();
-        return "ID: " + codigo +
+        return "ID: " + id +
                ", Data de Registro: " + dataRegistroFormatada +
                ", Peso: " + peso;
     

@@ -10,6 +10,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import modelo.Aluno;
+import modelo.HistoricoPeso;
+import utils.DateConverter;
 
 public class AtualizacaoGUI extends javax.swing.JFrame {
 
@@ -17,14 +19,28 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
      * Creates new form AtualizacaoGUI
      */
     public AtualizacaoGUI(Aluno aluno) {
+        
+        
+        setTitle("Gym: atualizar cadastro");
+        setSize(842,435);
+        setResizable(false);
+        //setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(AtualizacaoGUI.EXIT_ON_CLOSE);
+        
         initComponents();
         
-        jTextField1.setText(aluno.getNome());
-        jTextField3.setText(aluno.getCpf());
-        jTextField4.setText(aluno.getDataNascFormatada());
-        jTextField5.setText(String.valueOf(aluno.getPeso()));
-        jTextField6.setText(String.valueOf(aluno.getAltura()));
-        jTextField7.setText(String.valueOf(aluno.getCodigo()));
+        jTxtNome.setText(aluno.getNome());
+        jTxtCpf.setText(aluno.getCpf());
+        jTxtDataNascimento.setText(aluno.getDataNascFormatada());
+        jTxtPeso.setText(String.valueOf(aluno.getPeso()));
+        jTxtAltura.setText(String.valueOf(aluno.getAltura()));
+        jTxtIdAluno.setText(String.valueOf(aluno.getId()));
+        jTxtDataRegistro.setText(DateConverter.today("dd/MM/yyyy"));
+        jTxtPesoHist.setText("");
+        
+        atualizacaoDoHistorico();
+        
     }
     
     public AtualizacaoGUI() {
@@ -46,26 +62,31 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        jBtnBackToConsulta = new javax.swing.JButton();
+        jBtnAtualizar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jLabel11 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        jListHistoricos = new javax.swing.JList<>();
+        jLblDataRegistro = new javax.swing.JLabel();
+        jTxtDataRegistro = new javax.swing.JTextField();
+        jBtnAdicionar = new javax.swing.JButton();
+        jBtnExcluir = new javax.swing.JButton();
+        jBtnAlterar = new javax.swing.JButton();
+        jTxtPesoHist = new javax.swing.JTextField();
+        jLblPesoHist = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jLblNome = new javax.swing.JLabel();
+        jTxtNome = new javax.swing.JTextField();
+        jLblCpf = new javax.swing.JLabel();
+        jTxtCpf = new javax.swing.JTextField();
+        jLblDataNascimento = new javax.swing.JLabel();
+        jTxtDataNascimento = new javax.swing.JTextField();
+        jLblPeso = new javax.swing.JLabel();
+        jTxtPeso = new javax.swing.JTextField();
+        jLblAltura = new javax.swing.JLabel();
+        jTxtAltura = new javax.swing.JTextField();
+        jLblIdAluno = new javax.swing.JLabel();
+        jTxtIdAluno = new javax.swing.JTextField();
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -78,7 +99,7 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cadastro de Aluno");
+        jLabel1.setText("Gym");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -88,36 +109,55 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jButton6.setText("Voltar para Consulta");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jBtnBackToConsulta.setText("Voltar para Consulta");
+        jBtnBackToConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jBtnBackToConsultaActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Atualizar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jBtnAtualizar.setText("Atualizar");
+        jBtnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jBtnAtualizarActionPerformed(evt);
             }
         });
 
-        jTextField7.setEditable(false);
-
-        jLabel10.setText("Código :");
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Peso", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION)), "Histórico de Peso", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Histórico de Peso", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         jPanel3.setToolTipText("");
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jListHistoricos);
 
-        jLabel11.setText("Data de Registro:");
+        jLblDataRegistro.setText("Data de Registro:");
 
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        jTxtDataRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                jTxtDataRegistroActionPerformed(evt);
             }
         });
+
+        jBtnAdicionar.setText("Adicionar");
+        jBtnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAdicionarActionPerformed(evt);
+            }
+        });
+
+        jBtnExcluir.setText("Excluir");
+        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirActionPerformed(evt);
+            }
+        });
+
+        jBtnAlterar.setText("Alterar");
+        jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAlterarActionPerformed(evt);
+            }
+        });
+
+        jLblPesoHist.setText("Peso :");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -126,12 +166,24 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(24, 24, 24)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLblDataRegistro)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTxtDataRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLblPesoHist)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTxtPesoHist, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jBtnAdicionar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jBtnAlterar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -139,88 +191,112 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBtnExcluir)
+                    .addComponent(jBtnAlterar))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLblDataRegistro)
+                    .addComponent(jTxtDataRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnAdicionar)
+                    .addComponent(jLblPesoHist)
+                    .addComponent(jTxtPesoHist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Info Aluno", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12)), "Info Aluno", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION), "Info Aluno", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION), "Info Alunos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION)), "Informações do Aluno", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações do Aluno", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        jLabel2.setText("Nome :");
+        jLblNome.setText("Nome :");
 
-        jLabel6.setText("CPF :");
+        jLblCpf.setText("CPF :");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jTxtCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                jTxtCpfActionPerformed(evt);
             }
         });
 
-        jLabel7.setText("Data de Nascimento :");
+        jLblDataNascimento.setText("Data de Nascimento :");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jTxtDataNascimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                jTxtDataNascimentoActionPerformed(evt);
             }
         });
 
-        jLabel8.setText("Peso :");
+        jLblPeso.setText("Peso :");
 
-        jLabel9.setText("Altura :");
+        jTxtPeso.setEditable(false);
+
+        jLblAltura.setText("Altura :");
+
+        jLblIdAluno.setText("Código :");
+
+        jTxtIdAluno.setEditable(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLblNome)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLblCpf)
+                            .addGap(31, 31, 31)
+                            .addComponent(jTxtCpf))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLblAltura, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLblPeso, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLblDataNascimento, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGap(24, 24, 24)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTxtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTxtPeso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTxtAltura, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(6, 6, 6))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(31, 31, 31)
-                        .addComponent(jTextField3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLblIdAluno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTxtIdAluno)
+                .addGap(223, 223, 223))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLblIdAluno)
+                    .addComponent(jTxtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLblNome)
+                    .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLblCpf)
+                    .addComponent(jTxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLblDataNascimento)
+                    .addComponent(jTxtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                    .addComponent(jLblPeso)
+                    .addComponent(jTxtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLblAltura)
+                    .addComponent(jTxtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -228,39 +304,29 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(394, 394, 394)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField7)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(156, 156, 156)))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jBtnBackToConsulta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnAtualizar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(jBtnAtualizar)
+                    .addComponent(jBtnBackToConsulta))
                 .addContainerGap())
         );
 
@@ -291,41 +357,41 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jBtnBackToConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBackToConsultaActionPerformed
         ConsultaGUI NovaInstanciaConsultaGUI = new ConsultaGUI();
         NovaInstanciaConsultaGUI.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jBtnBackToConsultaActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jBtnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAtualizarActionPerformed
         
-        if ((jTextField1.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "O campo NOME nao pode retornar vazio");
+        if ((jTxtNome.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(this, "O campo NOME nao pode retornar vazio");
         }     
-        else if ((jTextField3.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "O campo CPF nao pode retornar vazio");
+        else if ((jTxtCpf.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(this, "O campo CPF nao pode retornar vazio");
         }
-        else if ((jTextField4.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "O campo DATA DE NASCIMENTO nao pode retornar vazio");
+        else if ((jTxtDataNascimento.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(this, "O campo DATA DE NASCIMENTO nao pode retornar vazio");
         }
-        else if ((jTextField5.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "O campo PESO nao pode retornar vazio");
+        else if ((jTxtPeso.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(this, "O campo PESO nao pode retornar vazio");
         }
-        else if ((jTextField6.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "O campo ALTURA nao pode retornar vazio");
+        else if ((jTxtAltura.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(this, "O campo ALTURA nao pode retornar vazio");
         }
         else {
             Aluno aluno = new Aluno();
             
-            int AlunoId = Integer.valueOf(jTextField7.getText());
-            String AlunoNome = jTextField1.getText();
+            int AlunoId = Integer.valueOf(jTxtIdAluno.getText());
+            String AlunoNome = jTxtNome.getText();
             String AlunoCpf = "";
-            if(aluno.verificaCpf(jTextField3.getText())){
-                AlunoCpf = jTextField3.getText();
+            if(aluno.verificaCpf(jTxtCpf.getText())){
+                AlunoCpf = jTxtCpf.getText();
             }
             LocalDate Data = LocalDate.of(2000,1,1);
-            if(aluno.verificaDataNasc(jTextField4.getText())){
-                String componentes[] = (jTextField4.getText()).split("/");
+            if(aluno.verificaDataNasc(jTxtDataNascimento.getText())){
+                String componentes[] = (jTxtDataNascimento.getText()).split("/");
                 int dia = Integer.valueOf(componentes[0]);
                 int mes = Integer.valueOf(componentes[1]);
                 int ano = Integer.valueOf(componentes[2]);
@@ -334,30 +400,181 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
                 Data = Data.withDayOfMonth(dia);
             }
             
-            aluno.setCodigo(AlunoId);
+            aluno.setId(AlunoId);
             aluno.setNome(AlunoNome);
             aluno.setCpf(AlunoCpf);
             aluno.setDataNasc(Date.valueOf(Data));
-            aluno.setPeso(Float.valueOf(jTextField5.getText()));
-            aluno.setAltura(Float.valueOf(jTextField6.getText()));
+            aluno.setPeso(Float.valueOf(jTxtPeso.getText()));
+            aluno.setAltura(Float.valueOf(jTxtAltura.getText()));
             
             AlunoDAO dao = new AlunoDAO();
             dao.atualizar(aluno);
-            JOptionPane.showMessageDialog(null, "Aluno(a) " + jTextField1.getText() + " atualizado(a) com sucesso!");
+            JOptionPane.showMessageDialog(this, "Aluno(a) " + jTxtNome.getText() + " atualizado(a) com sucesso!");
         }    
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jBtnAtualizarActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void jTxtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_jTxtCpfActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void jTxtDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtDataNascimentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_jTxtDataNascimentoActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void jTxtDataRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtDataRegistroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_jTxtDataRegistroActionPerformed
+
+    private void jBtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarActionPerformed
+    
+        if ((jTxtDataRegistro.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(this, "O campo DATA DE REGISTRO nao pode retornar vazio");
+        }
+        else if ((jTxtPesoHist.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(this, "O campo PESO nao pode retornar vazio");
+        }
+        else {
+            
+            HistoricoPeso historicoPeso = new HistoricoPeso();   
+            String formato = "dd/MM/yyyy";
+            java.sql.Date data = DateConverter.transformToSqlDate(jTxtDataRegistro.getText(), formato);
+            if(data == null){
+                JOptionPane.showMessageDialog(this, "O campo DATA DE REGISTRO deve possuir o formato: " + formato);
+            }
+            else{
+                try {
+                    float peso = Float.parseFloat(jTxtPesoHist.getText());
+                    
+                    historicoPeso.setAlunoId(Integer.parseInt(jTxtIdAluno.getText()));
+                    historicoPeso.setDataRegistro(data);
+                    historicoPeso.setPeso(peso);
+
+                    AlunoDAO dao = new AlunoDAO();
+                    dao.adicionaHistorico(historicoPeso);
+                    JOptionPane.showMessageDialog(this, "Histórico inserido com sucesso!");
+                    
+                    atualizacaoDoHistorico();
+                    
+                }
+                catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Verifique o campo PESO! Utilize ponto em vez de vírgula!");
+                }
+            }
+
+        }
+        
+    }//GEN-LAST:event_jBtnAdicionarActionPerformed
+
+    public void atualizacaoDoHistorico(){
+        
+        AlunoDAO dao = new AlunoDAO();
+        
+        List<HistoricoPeso> listaDeHistoricos = dao.consultaHistoricoByAluno(Integer.parseInt(jTxtIdAluno.getText()));
+
+        int n = listaDeHistoricos.size();
+        String[] modeloLista = new String[n];
+
+        int i = 0;
+        for(HistoricoPeso hp : listaDeHistoricos){
+            modeloLista[i] = hp.toString();
+            i++;
+        }
+
+        jListHistoricos.setListData(modeloLista);
+
+        if(n > 0){
+            if(listaDeHistoricos.getLast().getPeso() != Float.parseFloat(jTxtPeso.getText())){
+
+                jTxtPeso.setText(String.valueOf(listaDeHistoricos.getLast().getPeso()));
+
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(1000); // Esperar 1 segundo
+                    } 
+                    catch(InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                    jBtnAtualizar.doClick(); // "Apertar" o botão
+                }).start();
+
+            }
+        }
+  
+    }
+    
+    
+    
+    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
+        
+        AlunoDAO dao = new AlunoDAO();
+        
+        int exclusoesRealizadas = 0;
+        int exclusoesNaoRealizadas = 0;
+        int errosDeExecucao = 0;
+        
+        List<Integer> listaIds = Aluno.extractId(jListHistoricos.getSelectedValuesList());
+
+        List<Integer> resultados = dao.excluirVariosHistorico(listaIds);
+        
+        for(Integer resultado : resultados){
+            if(resultado == 1){
+                exclusoesRealizadas++;
+            }
+            else if(resultado == 0){
+                exclusoesNaoRealizadas++;
+            }
+            else if(resultado == -1){
+                errosDeExecucao++;
+            }
+        }
+        
+        if(exclusoesRealizadas == listaIds.size()){
+            if(exclusoesRealizadas == 0){
+                JOptionPane.showMessageDialog(this, "Selecione um item para excluir!");
+            }
+            else if (exclusoesRealizadas == 1){
+                JOptionPane.showMessageDialog(this, "Registro excluído com sucesso!");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Registros excluídos com sucesso!");
+            }
+            // System.out.println("OK"); 
+        }
+        else{
+            // System.out.println("Not OK");
+        }
+        
+        atualizacaoDoHistorico();
+
+    }//GEN-LAST:event_jBtnExcluirActionPerformed
+
+    private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+        
+        AlunoDAO dao = new AlunoDAO();
+        int itensSelecionados = jListHistoricos.getSelectedValuesList().size();
+        
+        if(itensSelecionados  <= 0){
+            JOptionPane.showMessageDialog(this, "Selecione um item para atualizar!");
+        }
+        else{
+            List<Integer> listaIds = Aluno.extractId(jListHistoricos.getSelectedValuesList());   
+            System.out.println(listaIds.get(0));
+            List<HistoricoPeso> listaDeHistoricos = dao.consultaHistorico(listaIds.get(0));
+            
+            if(listaDeHistoricos.size() > 0){
+                HistoricoPeso historicoPeso = listaDeHistoricos.get(0);
+                
+                AlteracaoGUI novaInstanciaAlteracaoGUI = new AlteracaoGUI(historicoPeso, this);
+                novaInstanciaAlteracaoGUI.setVisible(true);
+                atualizacaoDoHistorico();
+                //this.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Registro não encontrado no banco de dados!");
+            }   
+        }
+        
+    }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,31 +612,36 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jBtnAdicionar;
+    private javax.swing.JButton jBtnAlterar;
+    private javax.swing.JButton jBtnAtualizar;
+    private javax.swing.JButton jBtnBackToConsulta;
+    private javax.swing.JButton jBtnExcluir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JLabel jLblAltura;
+    private javax.swing.JLabel jLblCpf;
+    private javax.swing.JLabel jLblDataNascimento;
+    private javax.swing.JLabel jLblDataRegistro;
+    private javax.swing.JLabel jLblIdAluno;
+    private javax.swing.JLabel jLblNome;
+    private javax.swing.JLabel jLblPeso;
+    private javax.swing.JLabel jLblPesoHist;
+    private javax.swing.JList<String> jListHistoricos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTxtAltura;
+    private javax.swing.JTextField jTxtCpf;
+    private javax.swing.JTextField jTxtDataNascimento;
+    private javax.swing.JTextField jTxtDataRegistro;
+    private javax.swing.JTextField jTxtIdAluno;
+    private javax.swing.JTextField jTxtNome;
+    private javax.swing.JTextField jTxtPeso;
+    private javax.swing.JTextField jTxtPesoHist;
     // End of variables declaration//GEN-END:variables
 }

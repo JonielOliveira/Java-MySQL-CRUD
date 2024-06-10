@@ -10,3 +10,11 @@ CREATE TABLE IF NOT EXISTS aluno (
     peso FLOAT NOT NULL,
     altura FLOAT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS historico (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    aluno_id INT NOT NULL,
+    data_registro DATE NOT NULL,
+    peso FLOAT NOT NULL,
+    FOREIGN KEY (aluno_id) REFERENCES aluno(id)
+);

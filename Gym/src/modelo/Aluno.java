@@ -8,15 +8,15 @@ import java.util.List;
 
 public class Aluno {
 
-    private int codigo;
+    private int id;
     private String nome;
     private String cpf;
     private Date dataNasc;
     private float peso;
     private float altura;
 
-    public Aluno(int codigo, String nome, String cpf, Date dataNasc, float peso, float altura) {
-        this.codigo = codigo;
+    public Aluno(int id, String nome, String cpf, Date dataNasc, float peso, float altura) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.dataNasc = dataNasc;
@@ -28,12 +28,12 @@ public class Aluno {
         
     }
 
-    public int getCodigo() {
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
     
     public static List<Integer> extractId(List<String> lista){
@@ -157,7 +157,7 @@ public class Aluno {
         SimpleDateFormat fmtDesejado = new SimpleDateFormat("dd/MM/yyyy");
         String dataNascFormatada = fmtDesejado.format(dataNasc);
            
-        return "ID: " + codigo +
+        return "ID: " + id +
                ", CPF: " + cpf +
                ", Nome: " + nome +
                ", Data de Nascimento: " + dataNascFormatada +
