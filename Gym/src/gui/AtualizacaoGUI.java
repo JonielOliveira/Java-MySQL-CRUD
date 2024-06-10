@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import modelo.Aluno;
@@ -27,6 +28,9 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
         //setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(AtualizacaoGUI.EXIT_ON_CLOSE);
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icon/gym.png"));
+        setIconImage(icon.getImage());
         
         initComponents();
         

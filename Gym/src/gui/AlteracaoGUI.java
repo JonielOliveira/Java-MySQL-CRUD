@@ -4,6 +4,7 @@ package gui;
 import dao.AlunoDAO;
 import java.sql.Date;
 import java.time.LocalDate;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.Aluno;
 import modelo.HistoricoPeso;
@@ -23,6 +24,9 @@ public class AlteracaoGUI extends javax.swing.JFrame {
         //setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(AlteracaoGUI.DISPOSE_ON_CLOSE);
+               
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icon/gym.png"));
+        setIconImage(icon.getImage());
         
         initComponents();
         

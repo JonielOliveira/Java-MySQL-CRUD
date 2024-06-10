@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import modelo.Aluno;
 import java.time.LocalDate;
 import java.sql.Date;
+import javax.swing.ImageIcon;
 
 
 public class InsercaoGUI extends javax.swing.JFrame {
@@ -20,6 +21,10 @@ public class InsercaoGUI extends javax.swing.JFrame {
         //setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(ConsultaGUI.EXIT_ON_CLOSE);
+                
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icon/gym.png"));
+        setIconImage(icon.getImage());
+
         initComponents();
     }
 

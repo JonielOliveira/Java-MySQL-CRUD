@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -37,6 +38,10 @@ public class ConsultaGUI extends javax.swing.JFrame {
         //setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(ConsultaGUI.EXIT_ON_CLOSE);
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icon/gym.png"));
+        setIconImage(icon.getImage());
+
         initComponents();
     }
 
