@@ -16,6 +16,7 @@
 
     <build>
         <plugins>
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -25,6 +26,67 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            
+            <!-- Maven Assembly Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>io.crud.app.Main</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Launch4j Maven Plugin -->
+            <!--
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>1.7.25</version>
+                <configuration>
+                    <outfile>target/crud-1.0-SNAPSHOT.exe</outfile>
+                    <jar>target/crud-1.0-SNAPSHOT-jar-with-dependencies.jar</jar>
+                    <errTitle>Minha Aplicacao Error</errTitle>
+                    <cmdLine></cmdLine>
+                    <priority>1</priority>
+                    <stayAlive>false</stayAlive>
+                    <manifest></manifest>
+                    <icon></icon>
+                    <versionInfo>
+                        <fileVersion>1.0.0.0</fileVersion>
+                        <txtFileVersion>1.0.0.0</txtFileVersion>
+                        <productVersion>1.0.0.0</productVersion>
+                        <txtProductVersion>1.0.0.0</txtProductVersion>
+                    </versionInfo>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
         </plugins>
     </build>
+    <name>CRUD</name>
+    <description>Projeto desenvolvido com parte da avaliação da matéria de Linguagme de Programação do curso de Análise e Desenvolvimento de Sistemas da FATEC de São José dos Campos.</description>
 </project>
