@@ -14,14 +14,14 @@ public class InsercaoGUI extends javax.swing.JFrame {
      * Creates new form AlunoGUI
      */
     public InsercaoGUI() {
-        setTitle("Gym: adicionar usuário");
+        setTitle("Cadastro de Aluno");
         setSize(850,400);
         setResizable(false);
         //setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(ConsultaGUI.EXIT_ON_CLOSE);
                 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/gym.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/bmi.png"));
         setIconImage(icon.getImage());
 
         initComponents();
@@ -56,7 +56,7 @@ public class InsercaoGUI extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Gym");
+        jLabel1.setText("Cadastro de Aluno");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -104,26 +104,25 @@ public class InsercaoGUI extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jTextField2))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -164,7 +163,7 @@ public class InsercaoGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -193,19 +192,19 @@ public class InsercaoGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if ((jTextField1.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo NOME nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo NOME não pode estar vazio");
         }
         else if ((jTextField2.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo CPF nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo CPF não pode estar vazio");
         }
         else if ((jTextField3.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo DATA DE NASCIMENTO nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo DATA DE NASCIMENTO não pode estar vazio");
         }
         else if ((jTextField4.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo PESO nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo PESO não pode estar vazio");
         }
         else if ((jTextField5.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo ALTURA nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo ALTURA não pode estar vazio");
         }
         else {
             Aluno aluno = new Aluno();
@@ -234,7 +233,7 @@ public class InsercaoGUI extends javax.swing.JFrame {
 
             AlunoDAO dao = new AlunoDAO();
             dao.adiciona(aluno);
-            JOptionPane.showMessageDialog(this, "Aluno(a) " + jTextField1.getText() + " inserido(a) com sucesso!");
+            JOptionPane.showMessageDialog(this, "Cadastro " + jTextField1.getText() + " inserido com sucesso!");
         }
 
         jTextField1.setText("");

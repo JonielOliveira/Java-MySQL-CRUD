@@ -14,29 +14,27 @@ public class ImcCalculator {
     public static String result(Aluno aluno){
         float valor = imc(aluno);
         String resultado = "";       
-        if(0 <= valor & valor < 16){
-            resultado = "magreza grave";
-        }
-        else if(valor < 17){
-            resultado = "magreza moderada";
+        
+        if(valor >= 0 && valor < 17){
+            resultado = "muito abaixo do peso";
         }
         else if(valor < 18.6){
-            resultado = "magreza leve";
+            resultado = "abaixo do peso";
         }
         else if(valor < 25){
-            resultado = "peso ideal";
+            resultado = "peso normal";
         }
         else if(valor < 30){
-            resultado = "sobrepeso";
+            resultado = "acima do peso";
         }
         else if(valor < 35){
             resultado = "obesidade grau I";
         }
         else if(valor < 40){
-            resultado = "obesidade grau II ou severa";
+            resultado = "obesidade grau II";
         }
         else{
-            resultado = "obesidade grau III ou mórbida";
+            resultado = "obesidade grau III";
         }
         return resultado;
     }
@@ -46,13 +44,17 @@ public class ImcCalculator {
         String hoje = DateConverter.today("dd/MM/yyyy");
         String cpf = aluno.getCpf();
         String nome = aluno.getNome();
+        String peso = String.format("%.1f", aluno.getPeso());
+        String altura = String.format("%.2f", aluno.getAltura());
         String valorImc = String.format("%.2f", imc(aluno));
         String resultado = result(aluno);
         return "Data: " + hoje +
                "\nCPF: " + cpf +
                "\nNome: " + nome +
-               "\nIMC: " + valorImc +
-               "\nAvaliação: " + resultado;                
+               "\nPeso: " + peso + " kg" +
+               "\nAltura: " + altura + " m" +
+               "\nIMC: " + valorImc + " kg/m\u00B2" +
+               "\nClassificação: " + resultado;                
     }
     
     

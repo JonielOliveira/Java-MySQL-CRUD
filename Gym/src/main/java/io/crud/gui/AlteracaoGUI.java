@@ -16,13 +16,13 @@ public class AlteracaoGUI extends javax.swing.JFrame {
         
         this.telaAtualizacao = telaAtualizacao;
         
-        setTitle("Gym: alterar registro");
-        setSize(430,200);
+        setTitle("Cadastro de Aluno: alterar registro");
+        setSize(455,190);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(AlteracaoGUI.DISPOSE_ON_CLOSE);
                
-        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/gym.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/bmi.png"));
         setIconImage(icon.getImage());
         
         initComponents();
@@ -60,7 +60,7 @@ public class AlteracaoGUI extends javax.swing.JFrame {
         jBtnAplicar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(420, 200));
+        setPreferredSize(new java.awt.Dimension(455, 190));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -164,17 +164,17 @@ public class AlteracaoGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,10 +187,10 @@ public class AlteracaoGUI extends javax.swing.JFrame {
     private void jBtnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAplicarActionPerformed
     
         if ((jTxtDataRegistro.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo DATA DE REGISTRO nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo DATA DE REGISTRO não pode estar vazio");
         }
         else if ((jTxtPeso.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo PESO nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo PESO não pode estar vazio");
         }
         else {
             
@@ -198,7 +198,7 @@ public class AlteracaoGUI extends javax.swing.JFrame {
             String formato = "dd/MM/yyyy";
             java.sql.Date data = DateConverter.transformToSqlDate(jTxtDataRegistro.getText(), formato);
             if(data == null){
-                JOptionPane.showMessageDialog(this, "O campo DATA DE REGISTRO deve possuir o formato: " + formato);
+                JOptionPane.showMessageDialog(this, "O campo DATA DE REGISTRO deve estar no formato: " + formato);
             }
             else{
                 try {
@@ -211,12 +211,12 @@ public class AlteracaoGUI extends javax.swing.JFrame {
 
                     HistoricoPesoDAO daoHistorico = new HistoricoPesoDAO();
                     daoHistorico.atualizar(historicoPeso);
-                    JOptionPane.showMessageDialog(this, "Histórico alterado com sucesso!");
+                    JOptionPane.showMessageDialog(this, "Histórico modificado com sucesso!");
                     telaAtualizacao.atualizacaoDoHistorico();
                     
                 }
                 catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "Verifique o campo PESO! Utilize ponto em vez de vírgula!");
+                    JOptionPane.showMessageDialog(this, "Verificar o campo PESO! Utilizar o ponto em vez de vírgula!");
                 }
             }
 

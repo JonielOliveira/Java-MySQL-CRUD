@@ -15,7 +15,7 @@ public class Aluno {
     private Date dataNasc;
     private float peso;
     private float altura;
-    private List<HistoricoPeso> historicos;
+    //private List<HistoricoPeso> historicos;
 
     public Aluno(int id, String nome, String cpf, Date dataNasc, float peso, float altura) {
         this.id = id;
@@ -24,11 +24,11 @@ public class Aluno {
         this.dataNasc = dataNasc;
         this.peso = peso;
         this.altura = altura;
-        this.historicos = new ArrayList<>();
+        //this.historicos = new ArrayList<>();
     }
     
     public Aluno() {
-        this.historicos = new ArrayList<>();
+        //this.historicos = new ArrayList<>();
     }
 
     public int getId() {
@@ -39,22 +39,22 @@ public class Aluno {
         this.id = id;
     }
     
-    public static List<Integer> extractId(List<String> lista){
-        List<Integer> listaIds = new ArrayList<>();
-        
-        for(String elemento : lista){
-            int tagStart = elemento.indexOf(":");
-            int tagFinal = elemento.indexOf(",");
-            // System.out.println(tagStart);
-            // System.out.println(tagFinal);
-            if(tagStart != -1 & tagFinal != -1){
-                tagStart += 2;
-                int valor = Integer.valueOf(elemento.substring(tagStart, tagFinal));
-                listaIds.add(valor);
-            }
-        }
-        return listaIds;
-    } 
+//    public static List<Integer> extractId(List<String> lista){
+//        List<Integer> listaIds = new ArrayList<>();
+//        
+//        for(String elemento : lista){
+//            int tagStart = elemento.indexOf(":");
+//            int tagFinal = elemento.indexOf(",");
+//            // System.out.println(tagStart);
+//            // System.out.println(tagFinal);
+//            if(tagStart != -1 & tagFinal != -1){
+//                tagStart += 2;
+//                int valor = Integer.valueOf(elemento.substring(tagStart, tagFinal));
+//                listaIds.add(valor);
+//            }
+//        }
+//        return listaIds;
+//    } 
 
     public String getNome() {
         return nome;
@@ -153,55 +153,55 @@ public class Aluno {
         this.altura = altura;
     }
     
-    public void addHistorico(HistoricoPeso historicoPeso) {
-        if (historicoPeso.getAlunoId() == this.id) {
-            this.historicos.add(historicoPeso);
-            this.sortHistorico();
-        }
-    }
-    
-    public void removeHistorico(int id) {
-        if (this.historicos.removeIf(historico -> historico.getId() == id)) {
-            this.sortHistorico();
-        }
-    }
-    
-    public void removeAllHistorico() {
-        if (this.historicos.removeIf(historico -> historico.getAlunoId() == this.id)) {
-            this.sortHistorico();
-        }
-    }
-    
-    public void updateHistorico(int id, Date dataRegistro, float peso) {
-        for (HistoricoPeso hp : this.historicos) {
-            if (hp.getId() == id) {
-                hp.setDataRegistro(dataRegistro);
-                hp.setPeso(peso);
-                this.sortHistorico();
-                break;
-            }
-        }
-    }
-    
-    public HistoricoPeso getHistorico(int id) {
-        for (HistoricoPeso hp : this.historicos) {
-            if (hp.getId() == id) {
-                return hp;
-            }
-        }
-        return null;
-    }
-    
-    public void sortHistorico() {
-        this.historicos.sort(Comparator.comparing(HistoricoPeso::getDataRegistro));
-        this.updatePeso();
-    }
-    
-    public void updatePeso() {
-        if (!this.historicos.isEmpty()) {
-            this.peso = this.historicos.get(this.historicos.size() - 1).getPeso();
-        }
-    }
+//    public void addHistorico(HistoricoPeso historicoPeso) {
+//        if (historicoPeso.getAlunoId() == this.id) {
+//            this.historicos.add(historicoPeso);
+//            this.sortHistorico();
+//        }
+//    }
+//    
+//    public void removeHistorico(int id) {
+//        if (this.historicos.removeIf(historico -> historico.getId() == id)) {
+//            this.sortHistorico();
+//        }
+//    }
+//    
+//    public void removeAllHistorico() {
+//        if (this.historicos.removeIf(historico -> historico.getAlunoId() == this.id)) {
+//            this.sortHistorico();
+//        }
+//    }
+//    
+//    public void updateHistorico(int id, Date dataRegistro, float peso) {
+//        for (HistoricoPeso hp : this.historicos) {
+//            if (hp.getId() == id) {
+//                hp.setDataRegistro(dataRegistro);
+//                hp.setPeso(peso);
+//                this.sortHistorico();
+//                break;
+//            }
+//        }
+//    }
+//    
+//    public HistoricoPeso getHistorico(int id) {
+//        for (HistoricoPeso hp : this.historicos) {
+//            if (hp.getId() == id) {
+//                return hp;
+//            }
+//        }
+//        return null;
+//    }
+//    
+//    public void sortHistorico() {
+//        this.historicos.sort(Comparator.comparing(HistoricoPeso::getDataRegistro));
+//        this.updatePeso();
+//    }
+//    
+//    public void updatePeso() {
+//        if (!this.historicos.isEmpty()) {
+//            this.peso = this.historicos.get(this.historicos.size() - 1).getPeso();
+//        }
+//    }
     
     @Override
     public String toString() {

@@ -15,11 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import io.crud.modelo.Aluno;
 import io.crud.utils.ImcCalculator;
+import io.crud.utils.ListConverter;
+import java.nio.charset.Charset;
 
-/**
- *
- * @author Joniel
- */
 public class ConsultaGUI extends javax.swing.JFrame {
     
     private List<Aluno> listaAtual;
@@ -28,14 +26,14 @@ public class ConsultaGUI extends javax.swing.JFrame {
      * Creates new form ConsultaGUI
      */
     public ConsultaGUI() {
-        setTitle("Gym: realizar consultas");
+        setTitle("Cadastro de Aluno");
         setSize(863,400);
         setResizable(false);
         //setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(ConsultaGUI.EXIT_ON_CLOSE);
         
-        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/gym.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/bmi.png"));
         setIconImage(icon.getImage());
 
         initComponents();
@@ -139,29 +137,32 @@ public class ConsultaGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jBtnBackToInsercao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(99, 99, 99)
-                        .addComponent(jBtnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(111, 111, 111)
-                        .addComponent(jBtnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(111, 111, 111)
-                        .addComponent(jBtnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(110, 110, 110)
-                        .addComponent(jBtnConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBoxCons1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(jTxtConsV1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(jTxtConsV2))
-                    .addComponent(jScrollPane1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTxtConsV1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jBtnBackToInsercao, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                                .addGap(51, 51, 51)
+                                .addComponent(jBtnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                                .addGap(51, 51, 51)
+                                .addComponent(jBtnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                                .addGap(51, 51, 51)
+                                .addComponent(jBtnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                                .addGap(51, 51, 51)
+                                .addComponent(jBtnConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTxtConsV2))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -172,9 +173,9 @@ public class ConsultaGUI extends javax.swing.JFrame {
                     .addComponent(jBoxCons1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jTxtConsV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTxtConsV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -193,7 +194,7 @@ public class ConsultaGUI extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Gym");
+        jLabel1.setText("Cadastro de Aluno");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -205,13 +206,13 @@ public class ConsultaGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,6 +236,11 @@ public class ConsultaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnBackToInsercaoActionPerformed
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
+        consultarAluno();
+    }//GEN-LAST:event_jBtnConsultarActionPerformed
+    
+    public void consultarAluno() {
+        
         AlunoDAO dao = new AlunoDAO();
         
         // System.out.println(jBoxCons1.getSelectedItem());
@@ -260,8 +266,8 @@ public class ConsultaGUI extends javax.swing.JFrame {
         
         jList1.setListData(modeloLista);
         
-    }//GEN-LAST:event_jBtnConsultarActionPerformed
-
+    }
+    
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         
         AlunoDAO dao = new AlunoDAO();
@@ -271,7 +277,7 @@ public class ConsultaGUI extends javax.swing.JFrame {
         int errosDeExecucao = 0;
         
         //System.out.println(jList1.getSelectedValue());
-        List<Integer> listaIds = Aluno.extractId(jList1.getSelectedValuesList());
+        List<Integer> listaIds = ListConverter.extractId(jList1.getSelectedValuesList());
 
         List<Integer> resultados = dao.excluirVarios(listaIds);
         
@@ -292,10 +298,10 @@ public class ConsultaGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Selecione um item para excluir!");
             }
             else if (exclusoesRealizadas == 1){
-                JOptionPane.showMessageDialog(this, "Aluno(a) excluído(a) com sucesso!");
+                JOptionPane.showMessageDialog(this, "Cadastro excluído com sucesso!");
             }
             else{
-                JOptionPane.showMessageDialog(this, "Alunos(as) excluídos(as) com sucesso!");
+                JOptionPane.showMessageDialog(this, "Cadastros excluídos com sucesso!");
             }
             // System.out.println("OK"); 
         }
@@ -305,7 +311,7 @@ public class ConsultaGUI extends javax.swing.JFrame {
         
         new Thread(() -> {
             try {
-                Thread.sleep(1000); // Esperar 3 segundos
+                Thread.sleep(1000); // Esperar 1 segundos
             } 
             catch(InterruptedException ex) {
                 ex.printStackTrace();
@@ -324,16 +330,16 @@ public class ConsultaGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Selecione um item para atualizar!");
         }
         else{
-            List<Integer> listaIds = Aluno.extractId(jList1.getSelectedValuesList());
+            List<Integer> listaIds = ListConverter.extractId(jList1.getSelectedValuesList());
             // JOptionPane.showMessageDialog(null, "Item selecionado: " + listaIds.get(0));
             
             List<Aluno> listaDeAlunos = dao.consulta("id", String.valueOf(listaIds.get(0)), "");
             
             if(listaDeAlunos.size() > 0){
                 Aluno aluno = listaDeAlunos.get(0);
-                AtualizacaoGUI NovaInstanciaAtualizacaoGUI = new AtualizacaoGUI(aluno);
+                AtualizacaoGUI NovaInstanciaAtualizacaoGUI = new AtualizacaoGUI(this, aluno);
                 NovaInstanciaAtualizacaoGUI.setVisible(true);
-                this.dispose();
+                this.setVisible(false);
             }
             else{
                 JOptionPane.showMessageDialog(this, "Aluno(a) não encontrado no banco de dados!");
@@ -343,12 +349,24 @@ public class ConsultaGUI extends javax.swing.JFrame {
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
         
-        if(listaAtual == null || listaAtual.size() <= 0){      
+        AlunoDAO dao = new AlunoDAO();
+        
+        List<Integer> listaIds = ListConverter.extractId(jList1.getSelectedValuesList());
+        
+        List<Aluno> listaGeral = new ArrayList<>();
+        for (Integer i : listaIds) {
+            List<Aluno> listaDeAlunos = dao.consulta("id", String.valueOf(i) , "");
+            if (listaDeAlunos.size() > 0) {
+                listaGeral.add(listaDeAlunos.get(0));
+            }
+        }
+        
+        if(listaGeral == null || listaGeral.size() <= 0){      
             JOptionPane.showMessageDialog(this, "Não há dados para salvar!");
         }
         else{
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Gym: salvar relatorio");
+            fileChooser.setDialogTitle("Cadastro de Aluno: salvar relatorio");
 
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
             fileChooser.setFileFilter(filter);
@@ -365,19 +383,19 @@ public class ConsultaGUI extends javax.swing.JFrame {
 
                 StringBuilder sb = new StringBuilder();
 
-                for(Aluno a : listaAtual){
+                for(Aluno a : listaGeral){
                     sb.append(ImcCalculator.report(a)).append("\n\n");
                 }
 
                 String information = sb.toString();
-
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave, true))) {
+                
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave, Charset.forName("UTF-8"), true))) {
                     writer.write(information);
                     writer.newLine();
-                    JOptionPane.showMessageDialog(this, "Informação gravada com sucesso!");
+                    JOptionPane.showMessageDialog(this, "Relatório salvo com sucesso!");
                 } catch (IOException e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "Erro ao gravar a informação.");
+                    JOptionPane.showMessageDialog(this, "Erro ao tentar salvar o relatório.");
                 }
             }     
         }

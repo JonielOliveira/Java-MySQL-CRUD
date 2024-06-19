@@ -14,24 +14,28 @@ import javax.swing.JOptionPane;
 import io.crud.modelo.Aluno;
 import io.crud.modelo.HistoricoPeso;
 import io.crud.utils.DateConverter;
+import io.crud.utils.ListConverter;
 
 public class AtualizacaoGUI extends javax.swing.JFrame {
-
+    
+    private ConsultaGUI guiParent;
     /**
      * Creates new form AtualizacaoGUI
      */
-    public AtualizacaoGUI(Aluno aluno) {
+    public AtualizacaoGUI(ConsultaGUI gui, Aluno aluno) {
         
         
-        setTitle("Gym: atualizar cadastro");
+        setTitle("Cadastro de Aluno");
         setSize(842,435);
         setResizable(false);
         //setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(AtualizacaoGUI.EXIT_ON_CLOSE);
         
-        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/gym.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/bmi.png"));
         setIconImage(icon.getImage());
+        
+        guiParent = gui;
         
         initComponents();
         
@@ -104,7 +108,7 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Gym");
+        jLabel1.setText("Cadastro de Aluno");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -363,27 +367,28 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnBackToConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBackToConsultaActionPerformed
-        ConsultaGUI NovaInstanciaConsultaGUI = new ConsultaGUI();
-        NovaInstanciaConsultaGUI.setVisible(true);
+        
+        guiParent.consultarAluno();
+        guiParent.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBtnBackToConsultaActionPerformed
 
     private void jBtnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAtualizarActionPerformed
         
         if ((jTxtNome.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo NOME nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo NOME não pode estar vazio");
         }     
         else if ((jTxtCpf.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo CPF nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo CPF não pode estar vazio");
         }
         else if ((jTxtDataNascimento.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo DATA DE NASCIMENTO nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo DATA DE NASCIMENTO não pode estar vazio");
         }
         else if ((jTxtPeso.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo PESO nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo PESO não pode estar vazio");
         }
         else if ((jTxtAltura.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo ALTURA nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo ALTURA não pode estar vazio");
         }
         else {
             Aluno aluno = new Aluno();
@@ -414,7 +419,7 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
             
             AlunoDAO dao = new AlunoDAO();
             dao.atualizar(aluno);
-            JOptionPane.showMessageDialog(this, "Aluno(a) " + jTxtNome.getText() + " atualizado(a) com sucesso!");
+            JOptionPane.showMessageDialog(this, "Cadastro " + jTxtNome.getText() + " atualizado com sucesso!");
         }    
     }//GEN-LAST:event_jBtnAtualizarActionPerformed
 
@@ -433,10 +438,10 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
     private void jBtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarActionPerformed
     
         if ((jTxtDataRegistro.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo DATA DE REGISTRO nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo DATA DE REGISTRO não pode estar vazio");
         }
         else if ((jTxtPesoHist.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "O campo PESO nao pode retornar vazio");
+            JOptionPane.showMessageDialog(this, "O campo PESO não pode estar vazio");
         }
         else {
             
@@ -444,7 +449,7 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
             String formato = "dd/MM/yyyy";
             java.sql.Date data = DateConverter.transformToSqlDate(jTxtDataRegistro.getText(), formato);
             if(data == null){
-                JOptionPane.showMessageDialog(this, "O campo DATA DE REGISTRO deve possuir o formato: " + formato);
+                JOptionPane.showMessageDialog(this, "O campo DATA DE REGISTRO deve estar no formato: " + formato);
             }
             else{
                 try {
@@ -456,13 +461,13 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
 
                     HistoricoPesoDAO daoHistorico = new HistoricoPesoDAO();
                     daoHistorico.adiciona(historicoPeso);
-                    JOptionPane.showMessageDialog(this, "Histórico inserido com sucesso!");
+                    JOptionPane.showMessageDialog(this, "Peso inserido com sucesso!");
                     
                     atualizacaoDoHistorico();
                     
                 }
                 catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "Verifique o campo PESO! Utilize ponto em vez de vírgula!");
+                    JOptionPane.showMessageDialog(this, "Verificar o campo PESO! Utilizar o ponto em vez de vírgula!");
                 }
             }
 
@@ -477,13 +482,13 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
         List<HistoricoPeso> listaDeHistoricos = daoHistorico.consultaByAluno(Integer.parseInt(jTxtIdAluno.getText()));
 
         int n = listaDeHistoricos.size();
-        System.out.println(n);
+        //System.out.println(n);
         String[] modeloLista = new String[n];
 
         int i = 0;
         for(HistoricoPeso hp : listaDeHistoricos){
             modeloLista[i] = hp.toString();
-            System.out.println(hp);
+            //System.out.println(hp);
             i++;
         }
 
@@ -519,7 +524,7 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
         int exclusoesNaoRealizadas = 0;
         int errosDeExecucao = 0;
         
-        List<Integer> listaIds = Aluno.extractId(jListHistoricos.getSelectedValuesList());
+        List<Integer> listaIds = ListConverter.extractId(jListHistoricos.getSelectedValuesList());
 
         List<Integer> resultados = daoHistorico.excluirVarios(listaIds);
         
@@ -540,10 +545,10 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Selecione um item para excluir!");
             }
             else if (exclusoesRealizadas == 1){
-                JOptionPane.showMessageDialog(this, "Registro excluído com sucesso!");
+                JOptionPane.showMessageDialog(this, "Item excluído com sucesso!");
             }
             else{
-                JOptionPane.showMessageDialog(this, "Registros excluídos com sucesso!");
+                JOptionPane.showMessageDialog(this, "Itens excluídos com sucesso!");
             }
             // System.out.println("OK"); 
         }
@@ -565,7 +570,7 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Selecione um item para atualizar!");
         }
         else{
-            List<Integer> listaIds = Aluno.extractId(jListHistoricos.getSelectedValuesList());   
+            List<Integer> listaIds = ListConverter.extractId(jListHistoricos.getSelectedValuesList());   
             System.out.println(listaIds.get(0));
             List<HistoricoPeso> listaDeHistoricos = daoHistorico.consulta(listaIds.get(0));
             
@@ -578,7 +583,7 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
                 //this.dispose();
             }
             else{
-                JOptionPane.showMessageDialog(this, "Registro não encontrado no banco de dados!");
+                JOptionPane.showMessageDialog(this, "Item não encontrado no banco de dados!");
             }   
         }
         

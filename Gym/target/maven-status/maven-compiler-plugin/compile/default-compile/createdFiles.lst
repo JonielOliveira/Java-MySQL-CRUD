@@ -7,6 +7,7 @@ io\crud\gui\AtualizacaoGUI$1.class
 io\crud\gui\InsercaoGUI$3.class
 io\crud\gui\AtualizacaoGUI$5.class
 io\crud\utils\DateConverter.class
+io\crud\utils\ListConverter.class
 io\crud\gui\AlteracaoGUI$1.class
 io\crud\modelo\HistoricoPeso.class
 io\crud\gui\AtualizacaoGUI$6.class

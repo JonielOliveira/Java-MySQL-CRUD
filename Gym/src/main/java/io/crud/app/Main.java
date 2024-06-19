@@ -7,7 +7,8 @@ public class Main {
     
     public static void main(String[] args) {
         
-        SwingUtilities.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+        //SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 ConsultaGUI startWindow = new ConsultaGUI();
                 startWindow.setVisible(true);
