@@ -389,7 +389,7 @@ public class ConsultaGUI extends javax.swing.JFrame {
 
                 String information = sb.toString();
                 
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave, Charset.forName("UTF-8"), true))) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave, true))) {
                     writer.write(information);
                     writer.newLine();
                     JOptionPane.showMessageDialog(this, "Relatório salvo com sucesso!");

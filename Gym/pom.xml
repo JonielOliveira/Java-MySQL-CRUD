@@ -24,6 +24,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             
@@ -52,35 +53,12 @@
                     </execution>
                 </executions>
             </plugin>
-
+                       
             <!-- Launch4j Maven Plugin -->
-            <!--
             <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
                 <artifactId>launch4j-maven-plugin</artifactId>
                 <version>1.7.25</version>
-                <configuration>
-                    <outfile>target/crud-1.0-SNAPSHOT.exe</outfile>
-                    <jar>target/crud-1.0-SNAPSHOT-jar-with-dependencies.jar</jar>
-                    <errTitle>Minha Aplicacao Error</errTitle>
-                    <classPath>
-                        <mainClass>io.crud.app.Main</mainClass>
-                    </classPath>
-                    <jre>
-                        <path>C:\Program Files\Java\jre-1.8</path>
-                    </jre>
-                    <cmdLine></cmdLine>
-                    <priority>1</priority>
-                    <stayAlive>false</stayAlive>
-                    <manifest></manifest>
-                    <icon></icon>
-                    <versionInfo>
-                        <fileVersion>1.0.0.0</fileVersion>
-                        <txtFileVersion>1.0.0.0</txtFileVersion>
-                        <productVersion>1.0.0.0</productVersion>
-                        <txtProductVersion>1.0.0.0</txtProductVersion>
-                    </versionInfo>
-                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -89,9 +67,52 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            -->
-                        
+                <configuration>
+                    <outfile>target/Crud.exe</outfile>
+                    <jar>target/crud-1.0-SNAPSHOT-jar-with-dependencies.jar</jar>
+                    <dontWrapJar>false</dontWrapJar>
+                    <headerType>gui</headerType>
+                    <errTitle>Minha Aplicacao Error</errTitle>
+                    <classPath>
+                        <mainClass>io.crud.app.Main</mainClass>
+                        <addDependencies>true</addDependencies>
+                    </classPath>
+                    <cmdLine></cmdLine>
+                    <priority>normal</priority>
+                    <downloadUrl>http://java.com/download</downloadUrl>
+                    <supportUrl></supportUrl>
+                    <stayAlive>false</stayAlive>
+                    <manifest></manifest>
+                    <icon>src/main/resources/icons/bmi.ico</icon>
+                    <versionInfo>
+                        <fileVersion>1.0.0.0</fileVersion>
+                        <txtFileVersion>1.0.0.0</txtFileVersion>
+                        <productVersion>1.0.0.0</productVersion>
+                        <txtProductVersion>1.0.0.0</txtProductVersion>
+                        <fileDescription>CRUD</fileDescription>
+                        <!--<txtFileDescription>Descrição detalhada...</txtFileDescription>-->
+                        <productName>CRUD</productName>
+                        <!--<txtProductName>Produto detalhado...</txtProductName>-->
+                        <companyName>GitHub:JonielOliveira</companyName>
+                        <!--<txtCompanyName>Descrição da empresa...</txtCompanyName>-->
+                        <copyright>Todos os direitos reservados 2024-2024</copyright>
+                        <!--<txtCopyright>Descrição do copyright...</txtCopyright>-->
+                        <internalName>Crud</internalName>
+                        <originalFilename>Crud.exe</originalFilename>
+                        <language>PORTUGUESE_BRAZIL</language>
+                    </versionInfo>
+                    <jre>
+                        <path>C:\Program Files\Java\jre-1.8</path>
+                        <minVersion>1.8</minVersion>
+                        <maxVersion></maxVersion>
+                        <bundledJre64Bit>false</bundledJre64Bit>
+                        <bundledJreAsFallback>false</bundledJreAsFallback>
+                        <runtimeBits>64/32</runtimeBits>
+                        <initialHeapSize></initialHeapSize>
+                        <maxHeapSize></maxHeapSize>
+                    </jre>
+                </configuration>
+            </plugin>  
         </plugins>
     </build>
     <name>CRUD</name>

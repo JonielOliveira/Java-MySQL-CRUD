@@ -495,9 +495,9 @@ public class AtualizacaoGUI extends javax.swing.JFrame {
         jListHistoricos.setListData(modeloLista);
 
         if(n > 0){
-            if(listaDeHistoricos.getLast().getPeso() != Float.parseFloat(jTxtPeso.getText())){
+            if(listaDeHistoricos.get(listaDeHistoricos.size() - 1).getPeso() != Float.parseFloat(jTxtPeso.getText())){
 
-                jTxtPeso.setText(String.valueOf(listaDeHistoricos.getLast().getPeso()));
+                jTxtPeso.setText(String.valueOf(listaDeHistoricos.get(listaDeHistoricos.size() - 1).getPeso()));
 
                 new Thread(() -> {
                     try {
